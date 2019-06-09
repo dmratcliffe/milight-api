@@ -1,3 +1,7 @@
 module.exports = function(app){
-    res.send("Hello World");
+    //type will be something like on, off, toggle
+    //where zone will be the zone we want.
+    app.get('/control/:type/:zone', (req, res)=>{
+        res.send("Hello World");
+    });
 }
