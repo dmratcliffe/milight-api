@@ -2,7 +2,7 @@
   "name": "milight-api",
   "version": "1.0.0",
   "description": "A tool to control milights from 'web hooks'",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/dmratcliffe/milight-api/issues"
   },
-  "homepage": "https://github.com/dmratcliffe/milight-api#readme"
+  "homepage": "https://github.com/dmratcliffe/milight-api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
