@@ -29,7 +29,6 @@ module.exports = {
             zones.push(4);
 
 
-
         return zones;
     }
 }
