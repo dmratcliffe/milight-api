@@ -1,16 +1,19 @@
-module.exports = function(app, light_state){
+module.exports = function (app, light_state) {
     //type will be something like on, off, toggle
     //where zone will be the zone we want.
-    app.get('/control/:type/:zone', (req, res)=>{
+    app.get('/control/:type/:zone', (req, res) => {
+        console.log("BEGIN CONTROL COMMAND");
+        
         var z_s = require('../classes/zone_sanitize');
         type = req.params.type;
         zone = req.params.zone;
 
+        let error_flag = 0;
+
         let zones = z_s.sanitize(zone);
-        let response = "Success";
         zones.forEach(element => {
             //decide the state of the lights
-            switch (type){
+            switch (type) {
                 case "on":
                     light_state[element] = 1;
                     break;
@@ -21,12 +24,13 @@ module.exports = function(app, light_state){
                     light_state[element] = !light_state[element];
                     break;
                 default:
-                    response = "Invalid command. Check documentation or spelling!";
+                    error_flag++;
+                    console.log("The command wasn't found. Check your documentation or spelling! ->" + light_state[element] + " ->" + type);
                     break;
             }
 
             //act on the state of the lioght
-            switch(light_state[element]){
+            switch (light_state[element]) {
                 case true:
                 case 1:
                     console.log(true);
@@ -36,13 +40,16 @@ module.exports = function(app, light_state){
                     console.log(false);
                     break;
                 default:
-                    console.log("Something horrible has happened! ->"+light_state[element]);
+                    error_flag++;
+                    console.log("The light is in an invalid state! ->" + light_state[element]);
                     break;
             }
         });
+        if(error_flag)
+            res.send("There was multiple errors trying to execute your command. (" + error_flag + ")");
+        else
+            res.send("Succesfully ran '" + type + "' on " + zones.length + " light(s)");
 
-        //res.send(z_s.sanitize(zone));
-        //res.send(light_state);
-        res.send(light_state);
+        console.log("END CONTROL COMMAND");
     });
 }
