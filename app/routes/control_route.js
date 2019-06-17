@@ -26,6 +26,19 @@ module.exports = function(app, light_state){
             }
 
             //act on the state of the lioght
+            switch(light_state[element]){
+                case true:
+                case 1:
+                    console.log(true);
+                    break;
+                case false:
+                case 0:
+                    console.log(false);
+                    break;
+                default:
+                    console.log("Something horrible has happened! ->"+light_state[element]);
+                    break;
+            }
         });
 
         //res.send(z_s.sanitize(zone));
