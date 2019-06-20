@@ -14,15 +14,16 @@ module.exports = function (app, light_state, light_promise, light_commands) {
         let zones = z_s.sanitize(zone);
         zones.forEach(zone => {
             //decide the state of the lights
+            curState = light_state[zone].state;
             switch (type) {
                 case "on":
-                    light_state[zone] = 1;
+                    curState = 1;
                     break;
                 case "off":
-                    light_state[zone] = 0;
+                    curState = 0;
                     break;
                 case "toggle":
-                    light_state[zone] = !light_state[zone];
+                    curState = !curState;
                     break;
                 default:
                     error_flag++;
@@ -30,8 +31,10 @@ module.exports = function (app, light_state, light_promise, light_commands) {
                     break;
             }
 
+            light_state[zone].state = curState;
+
             //act on the state of the lioght
-            switch (light_state[zone]) {
+            switch (light_state[zone].state) {
                 case true:
                 case 1:
                     console.log("Turning on zone ->" + zone);
@@ -54,6 +57,9 @@ module.exports = function (app, light_state, light_promise, light_commands) {
         
         console.log(response);
         res.send(response);
+
+        console.log("Light state: ");
+        console.log(light_state)
 
         console.log("END CONTROL COMMAND");
     });

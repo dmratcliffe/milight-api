@@ -14,6 +14,12 @@ const app = express();
 const port = 1337;
 
 var light_state = [0,0,0,0,0];
+for(i = 0; i < light_state.length; i++){
+  light_state[i] = {
+    "state": 0,
+    "brightness": 100
+  }
+}
 
 app.use(express.json());
 require('./app/routes')(app, light_state, light_controller, light_commands);
