@@ -2,7 +2,8 @@ module.exports = function (app, light_state, light_promise, light_commands) {
     //type will be something like on, off, toggle
     //where zone will be the zone we want.
     app.get('/control/:type/:zone', (req, res) => {
-        console.log("BEGIN CONTROL COMMAND");
+        curTime = new Date();
+        console.log("BEGIN CONTROL COMMAND ->" + curTime.getHours() + ":" + curTime.getMinutes() + ":" + curTime.getSeconds());
         
         var z_s = require('../classes/zone_sanitize');
         type = req.params.type;
