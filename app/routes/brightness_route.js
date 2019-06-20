@@ -8,11 +8,11 @@ module.exports = function(app, light_state, light_controller, light_commands){
         percent = req.params.percent;
         var z_s = require('../classes/zone_sanitize');
 
-        let zones = r_s.sanitize(zone);
+        let zones = z_s.sanitize(zone);
 
         zones.forEach(zone => {
             light_state[zone].brightness = percent;
-            light.sendCommands(commands.fullColor.brightness(zone, percent));
+            light_controller.sendCommands(light_commands.fullColor.brightness(zone, percent));
         });
     });
 }
