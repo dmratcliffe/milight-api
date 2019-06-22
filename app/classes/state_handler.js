@@ -4,12 +4,10 @@ module.exports = function (light_state, zones, light_controller, light_commands)
 
         switch (currentLight.state) {
             case true:
-            case 1:
                 console.log("Turning on zone ->" + zone);
                 light_controller.sendCommands(light_commands.fullColor.on(zone));
                 break;
             case false:
-            case 0:
                 console.log("Turning off zone ->" + zone);
                 light_controller.sendCommands(light_commands.fullColor.off(zone));
                 break;

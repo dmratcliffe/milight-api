@@ -16,7 +16,7 @@ const port = 1337;
 var light_state = [0,0,0,0,0];
 for(i = 0; i < light_state.length; i++){
   light_state[i] = {
-    "state": 0,
+    "state": false,
     "brightness": 100
   }
 }

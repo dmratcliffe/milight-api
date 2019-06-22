@@ -13,6 +13,7 @@ module.exports = function(app, light_state, light_controller, light_commands){
 
         let zones = z_s.sanitize(zone);
 
+    
         zones.forEach(zone => {
             light_state[zone].brightness = percent;
         });
