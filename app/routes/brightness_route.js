@@ -7,12 +7,10 @@ module.exports = function(app, light_state, light_controller, light_commands){
         curTime = new Date();
         console.log("BEGIN BRIGHTNESS COMMAND ->" + curTime.getHours() + ":" + curTime.getMinutes() + ":" + curTime.getSeconds());
         
+        var z_s = require('../classes/zone_sanitize');
         zone = req.params.zone;
         percent = req.params.percent;
-        var z_s = require('../classes/zone_sanitize');
-
-        let zones = z_s.sanitize(zone);
-
+        zones = z_s.sanitize(zone);
     
         zones.forEach(zone => {
             light_state[zone].brightness = percent;
@@ -21,7 +19,6 @@ module.exports = function(app, light_state, light_controller, light_commands){
         require('../classes/state_handler')(light_state, zones, light_controller, light_commands);
 
         res.send(light_state)
-
         console.log("END BRIGHTNESS COMMAND");
     });
 }
