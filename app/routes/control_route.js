@@ -8,11 +8,8 @@ module.exports = function (app, light_state, light_promise, light_commands) {
         
         var z_s = require('../classes/zone_sanitize');
         zones = z_s.sanitize(req.params.zone);
-        //this kind of code is used a lot TODO: move to a function??
-        //something like set_zones(zones, light_state, <changing>, <newval>)
-        zones.forEach(zone => {
-            light_state[zone].state = true;
-        });
+        
+        zones.forEach(zone => { light_state[zone].state = true; });
 
         require('../classes/state_handler')(light_state, zones, light_promise, light_commands);
 
@@ -27,9 +24,7 @@ module.exports = function (app, light_state, light_promise, light_commands) {
         var z_s = require('../classes/zone_sanitize');
         zones = z_s.sanitize(req.params.zone);
 
-        zones.forEach(zone => {
-            light_state[zone].state = false;
-        });
+        zones.forEach(zone => { light_state[zone].state = false; });
 
         require('../classes/state_handler')(light_state, zones, light_promise, light_commands);
 
@@ -44,9 +39,7 @@ module.exports = function (app, light_state, light_promise, light_commands) {
         var z_s = require('../classes/zone_sanitize');
         zones = z_s.sanitize(req.params.zone);
 
-        zones.forEach(zone => {
-            light_state[zone].state = !light_state[zone].state;
-        });
+        zones.forEach(zone => { light_state[zone].state = !light_state[zone].state; });
 
         require('../classes/state_handler')(light_state, zones, light_promise, light_commands);
 

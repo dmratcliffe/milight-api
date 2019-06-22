@@ -12,9 +12,7 @@ module.exports = function(app, light_state, light_controller, light_commands){
         percent = req.params.percent;
         zones = z_s.sanitize(zone);
     
-        zones.forEach(zone => {
-            light_state[zone].brightness = percent;
-        });
+        zones.forEach(zone => { light_state[zone].brightness = percent; });
 
         require('../classes/state_handler')(light_state, zones, light_controller, light_commands);
 
